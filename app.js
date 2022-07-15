@@ -5,6 +5,7 @@ const request = require("request");
 const https = require("https");
 const mailchimp = require("@mailchimp/mailchimp_marketing");
 const app = express();
+// const apiKey1 = process.env.API_KEY;
 // Use body-parser
 app.use(bodyParser.urlencoded({extended: true}));
 // The public folder which holds the CSS and images
@@ -20,7 +21,12 @@ res.sendFile(__dirname + "/signup.html");
 // Setting up MailChimp
 mailchimp.setConfig({
 // ENTER API KEY HERE
-apiKey: "5a9a4cac6716ebf8355f10b0cb7426e0-us11",
+// apiKey: ${String(apiKey1)},
+// apiKey: apiKey1,
+// `apiKey:${String(apiKey1)}`
+// apiKey: ${process.env.API_KEY},
+apiKey: process.env.API_KEY,
+
 // ENTER API KEY PREFIX HERE i.e. THE SERVER
 server: "us11",
 });
@@ -66,27 +72,13 @@ res.redirect("/");
 });
 
 
-// mailchimp api key
-// 5a9a4cac6716ebf8355f10b0cb7426e0-us11
+// mailchimp api key secured, in command line enter:
+// heroku config:set API_KEY=<your api key>
+// to check:
+// heroku config:get API_KEY
+// store and call on api key with heroku
+// const apiKey = process.env.API_KEY;
+// auth:`uname:${String(apiKey)}`
 
 // audience id or list id
 // ec1520b94d
-
-
-// OLD VERSION SETUP FROM ANGELAS BOOTCAMP LEFTOVERS:
-//     const jsonData = JSON.stringify(data);
-// https.request(url, options,  function(response) {
-// const url = "https://us11.api.mailchimp.com/3.0/lists/ec1520b94d"
-// const options = {
-//     method: "POST",
-//     auth: "kevin1:5a9a4cac6716ebf8355f10b0cb7426e0-us11"
-// }
-// const request = https.request(url, options, function(response){
-//     response.on("data",function(data){
-//         console.log(JSON.parse(data));
-//     })
-// })
-// request.write(jsonData);
-// request.end();
-// });
-// });
