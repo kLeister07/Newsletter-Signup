@@ -5,7 +5,6 @@ const request = require("request");
 const https = require("https");
 const mailchimp = require("@mailchimp/mailchimp_marketing");
 const app = express();
-// const apiKey1 = process.env.API_KEY;
 // Use body-parser
 app.use(bodyParser.urlencoded({extended: true}));
 // The public folder which holds the CSS and images
@@ -21,12 +20,7 @@ res.sendFile(__dirname + "/signup.html");
 // Setting up MailChimp
 mailchimp.setConfig({
 // ENTER API KEY HERE
-// apiKey: ${String(apiKey1)},
-// apiKey: apiKey1,
-// `apiKey:${String(apiKey1)}`
-// apiKey: ${process.env.API_KEY},
 apiKey: process.env.API_KEY,
-
 // ENTER API KEY PREFIX HERE i.e. THE SERVER
 server: "us11",
 });
@@ -76,9 +70,8 @@ res.redirect("/");
 // heroku config:set API_KEY=<your api key>
 // to check:
 // heroku config:get API_KEY
-// store and call on api key with heroku
+// store or call on api key with heroku
 // const apiKey = process.env.API_KEY;
-// auth:`uname:${String(apiKey)}`
 
 // audience id or list id
 // ec1520b94d
